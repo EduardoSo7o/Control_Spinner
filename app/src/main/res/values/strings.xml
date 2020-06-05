@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Control_Spinner</string>
+    <string name="et_num1_String">First number</string>
+    <string name="et_num2_String">Second number</string>
+    <string name="btn_calculate">Calculate</string>
+    <string name="tv_result">Result</string>
+
+</resources>
