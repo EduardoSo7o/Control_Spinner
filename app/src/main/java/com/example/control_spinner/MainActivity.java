@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editText1 = (EditText) findViewById(R.id.et_num1);
-        editText2 = (EditText) findViewById(R.id.et_num2);
-        spinner1 = (Spinner) findViewById(R.id.spinner);
-        textViewRes = (TextView) findViewById(R.id.tv_result);
+        editText1 = findViewById(R.id.et_num1);
+        editText2 = findViewById(R.id.et_num2);
+        spinner1 = findViewById(R.id.spinner);
+        textViewRes = findViewById(R.id.tv_result);
 
         String[] options = {"Add", "Subtract", "Multiply", "Divide"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, options);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item_eduardosoto, options);
         spinner1.setAdapter(adapter);
 
         calculate(new View(this));
@@ -50,20 +50,25 @@ public class MainActivity extends AppCompatActivity {
 
             String selection = spinner1.getSelectedItem().toString();
 
-            if (selection.equals("Add")) {
-                result = value1 + value2;
-            } else if (selection.equals("Subtract")) {
-                result = value1 - value2;
-            } else if (selection.equals("Multiply")) {
-                result = value1 * value2;
-            } else if (selection.equals("Divide")) {
-                if (value2 != 0) {
-                    result = value1 / value2;
-                } else {
-                    throw new DividedByZeroException();
-                }
-            } else {
-                throw new NonOperationSelectedException();
+            switch (selection) {
+                case "Add":
+                    result = value1 + value2;
+                    break;
+                case "Subtract":
+                    result = value1 - value2;
+                    break;
+                case "Multiply":
+                    result = value1 * value2;
+                    break;
+                case "Divide":
+                    if (value2 != 0) {
+                        result = value1 / value2;
+                    } else {
+                        throw new DividedByZeroException();
+                    }
+                    break;
+                default:
+                    throw new NonOperationSelectedException();
             }
 
             textViewRes.setText(String.valueOf(result));
